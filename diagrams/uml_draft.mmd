@@ -1,0 +1,44 @@
+---
+id: 1f3c0e99-5d84-4a12-89c6-e74cb26701be
+---
+classDiagram
+    %% PawPal+ class diagram — matches reflection.md initial design and README requirements.
+    %% Keep this file updated so it matches your final implementation.
+
+    class Owner {
+        +str name
+        +list~Pet~ pets
+        +dict preferences
+        +add_pet(pet: Pet) None
+        +edit_info(name: str, preferences: dict) None
+    }
+
+    class Pet {
+        +str name
+        +str species
+        +list~Task~ tasks
+        +add_task(task: Task) None
+        +edit_info(name: str, species: str) None
+    }
+
+    class Task {
+        +str name
+        +str priority
+        +int duration_minutes
+        +str category
+        +edit_task(name: str, priority: str, duration_minutes: int) None
+    }
+
+    class Scheduler {
+        +list~Task~ daily_tasks
+        +int available_minutes
+        +add_task(task: Task) None
+        +remove_task(task: Task) None
+        +sort_by_priority() list~Task~
+        +sort_by_duration() list~Task~
+        +generate_plan() list~Task~
+    }
+
+    Owner "1" --> "0..*" Pet : owns
+    Pet "1" --> "0..*" Task : has
+    Scheduler "1" --> "0..*" Task : schedules
