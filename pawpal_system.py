@@ -25,6 +25,10 @@ class Task:
     frequency: Frequency = Frequency.DAILY
     completed: bool = False
 
+    def mark_complete(self) -> None:
+        # Mark this task as completed.
+        self.completed = True
+
     def edit_task(self, name: str, priority: Priority, duration_minutes: int, category: str, frequency: Frequency) -> None:
         # Update any of the task's fields in place.
         self.name = name
