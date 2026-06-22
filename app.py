@@ -114,7 +114,7 @@ if owner.pets:
     with col3:
         priority = st.selectbox("Priority", ["high", "medium", "low"])
 
-    frequency = st.selectbox("Frequency", ["daily", "weekly", "as_needed"])
+    frequency = st.selectbox("Frequency", ["daily", "weekly", "as needed"])
 
     if st.button("Add task"):
         task_title = task_title.strip()
@@ -122,7 +122,7 @@ if owner.pets:
             st.warning("Please enter a task title.")
         else:
             priority_map = {"high": Priority.HIGH, "medium": Priority.MEDIUM, "low": Priority.LOW}
-            frequency_map = {"daily": Frequency.DAILY, "weekly": Frequency.WEEKLY, "as_needed": Frequency.AS_NEEDED}
+            frequency_map = {"daily": Frequency.DAILY, "weekly": Frequency.WEEKLY, "as needed": Frequency.AS_NEEDED}
             task = Task(
                 name=task_title,
                 priority=priority_map[priority],
@@ -148,7 +148,7 @@ if owner.pets:
                 "task": t.name,
                 "priority": t.priority.name.lower(),
                 "duration (min)": t.duration_minutes,
-                "frequency": t.frequency.value,
+                "frequency": "as needed" if t.frequency == Frequency.AS_NEEDED else t.frequency.value,
                 "due date": str(t.due_date),
                 "completed": t.completed,
             } for t in tasks_to_show])
