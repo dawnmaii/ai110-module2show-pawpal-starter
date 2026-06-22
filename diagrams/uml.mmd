@@ -24,7 +24,6 @@ classDiagram
         +list~Pet~ pets
         +dict preferences
         +add_pet(pet: Pet) None
-        +remove_pet(pet: Pet) None
         +get_all_tasks() list~Task~
         +edit_info(name: str, preferences: dict) None
     }
@@ -45,7 +44,10 @@ classDiagram
         +str category
         +Frequency frequency
         +bool completed
-        +edit_task(name: str, priority: Priority, duration_minutes: int, category: str, frequency: Frequency) None
+        +date due_date
+        +mark_complete() None
+        +next_occurrence() Task?
+        +edit_task(name: str, priority: Priority, duration_minutes: int, category: str, frequency: Frequency, due_date: date?) None
     }
 
     class Scheduler {
@@ -53,6 +55,7 @@ classDiagram
         +int available_minutes
         +list~Task~ daily_tasks
         -int _minutes_used
+        -list~Pet~ _loaded_pets
         +load_tasks_from_pet(pet: Pet) None
         +load_tasks_from_owner() None
         +add_task(task: Task) None
@@ -60,7 +63,7 @@ classDiagram
         +remaining_minutes() int
         +sort_by_priority() list~Task~
         +sort_by_duration() list~Task~
-        +generate_plan() list~Task~
+        +generate_plan(sort_by: str) list~Task~
     }
 
     Task --> Priority : uses
