@@ -6,17 +6,17 @@ from typing import Any  # needed for dict[str, Any] in Owner.preferences
 
 
 class Priority(Enum):
-    # Lower integer value = higher priority; used for numeric comparison in sort and conflict resolution.
+    # Lower integer value = higher priority; used for numeric comparison in sort and conflict resolution
     HIGH = 1
     MEDIUM = 2
     LOW = 3
 
 
 class Frequency(Enum):
-    # String values match what the UI displays and what Frequency.value returns.
+    # String values match what the UI displays and what Frequency.value returns
     DAILY = "daily"
     WEEKLY = "weekly"
-    AS_NEEDED = "as_needed"
+    AS_NEEDED = "as needed"
 
 
 @dataclass
@@ -71,14 +71,14 @@ class Pet:
 
     def add_task(self, task: Task) -> None:
         # Block duplicates only when an incomplete task with the same name already exists;
-        # completed tasks with the same name are allowed so recurring tasks can coexist with their history.
+        # Completed tasks with the same name are allowed so recurring tasks can coexist with their history.
         if any(t.name == task.name and not t.completed for t in self.tasks):
             raise ValueError(f"Task '{task.name}' already exists for {self.name}.")
         self.tasks.append(task)
 
     def remove_task(self, task: Task) -> None:
-        # Identity check (t is task) instead of equality so two tasks with identical field values
-        # don't accidentally remove the wrong one.
+        # Identity check (t is task) instead of equality so two tasks with identical field
+        # values don't accidentally remove the wrong one.
         for i, t in enumerate(self.tasks):
             if t is task:
                 del self.tasks[i]
@@ -115,7 +115,7 @@ class Owner:
 @dataclass
 class Scheduler:
     """Retrieves, organizes, and manages tasks across an owner's pets."""
-    owner: Owner
+    owner: Owner | None = None  # only required when calling load_tasks_from_owner(); omit when loading pets individually via load_tasks_from_pet()
     available_minutes: int = 480  # default 8-hour day
     daily_tasks: list[Task] = field(default_factory=list)
     _minutes_used: int = field(default=0, init=False, repr=False)  # excluded from __init__ and __repr__; reset each time generate_plan runs
@@ -145,6 +145,9 @@ class Scheduler:
 
     def load_tasks_from_owner(self) -> None:
         # Full reload: clear both lists so calling this twice doesn't accumulate duplicates.
+        # Requires owner to be set; raises if called without one (use load_tasks_from_pet() instead for multi-owner flows).
+        if self.owner is None:
+            raise ValueError("load_tasks_from_owner() requires Scheduler.owner to be set.")
         self.daily_tasks = []
         self._loaded_pets = []
         for pet in self.owner.pets:

@@ -80,19 +80,19 @@
 **a. What you tested**
 
 - What behaviors did you test?
-  
+  I had AI help me test for mainly edge cases that entail the user doing things "out of order" or unpredictable input (for example, empty owner or pet name, duplicate tasks, checking a task complete and then unchecking it again).
 
 - Why were these tests important?
-  
+  I consider these tests important because they can bring about very obvious logic errors if the app logic wasn't designed to handle them. I can't always assume the user will go down a "happy path" or a typical "sad path";  I treat the user as if they want to break my apps on purpose.
 
 
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
-  
+  I'm pretty confident that it works fine, at least for two owners with multiple pets shared between them. 
 
 - What edge cases would you test next if you had more time?
-  
+  I think I would want to try the test case of either several owners, or several pets under one owner (like 10) and see how the app would handle such input. This would be for the crazy cat ladies.
 
 
 ---
@@ -102,14 +102,15 @@
 **a. What went well**
 
 - What part of this project are you most satisfied with?
-  
+  I'm most satisfied with the UML diagram; I like how easy it is to comprehend how the Python files speak to one other and what behavior is expected of each class and their methods.
 
 **b. What you would improve**
 
 - If you had another iteration, what would you improve or redesign?
+  I would work on redesigning the scheduler first before implementing its logic, since the UI was already plain to begin with and I could technically do anything I wanted.
   
 
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
-  
+  Most important thing is to envision what you want the app to look like before working on the backend. I unfortunately did the reverse and found myself making several UI changes and then updating the code repeatedly to change this when I realize users wouldn't understand how to navigate the app initially. So I need to work on design a bit more and be more confident in the frontend of the app, so I don't have to keep fixing bugs that my lack of a design would create. 

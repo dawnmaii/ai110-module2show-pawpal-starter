@@ -51,7 +51,7 @@ classDiagram
     }
 
     class Scheduler {
-        +Owner owner
+        +Owner? owner
         +int available_minutes
         +list~Task~ daily_tasks
         -int _minutes_used
@@ -70,5 +70,5 @@ classDiagram
     Task --> Frequency : uses
     Owner "1" --> "0..*" Pet : owns
     Pet "1" --> "0..*" Task : has
-    Scheduler "1" --> "1" Owner : belongs to
+    Scheduler "1" --> "0..1" Owner : optionally scoped to
     Scheduler "1" --> "0..*" Task : schedules

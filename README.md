@@ -143,23 +143,27 @@ tests/test_pawpal.py::TestRecurringTaskFlow::test_recurring_task_chain_across_sc
 
 ## 📐 Smarter Scheduling
 
-> Fill in once you've implemented scheduling logic.
-
-| Feature | Method(s) | Notes |
-|---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+|      Feature       |                           Method(s)                           |                                           Notes                                          |
+|--------------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------|
+|    Task sorting    |  sort_by_priority, sort_by_duration, generate_plan(sort_by)   |            options to sort by priority, duration, or both (priority first)               |
+|     Filtering      | load_tasks_from_pet, generate_plan, lines 243-246 and 258-269 |     filter out by pet and priority, drops duplicate tasks and if there's no time         |
+|  Conflict handling |                      load_tasks_from_pet                      |          handles conflicts based on which task was added first (will keep it)            |
+|   Recurring tasks  |          next_occurrence, add_task, lines 297-311             | handles both daily tasks, new ones generatead upon checking it off and regenerating plan |
 
 ## 📸 Demo Walkthrough
 
-Describe your app in numbered steps so a reader can follow along without watching a video:
+1. PawPal+ will ask you to add an owner first, please put in your name!
+2. Add your pets!
+3. If you'd like to add more owners and their pets, feel free to do so. You can also switch between owners.
+4. Create your tasks for your pet(s)! You can designate which task to create for which pet when doing so.
+5. Deterimne how many minutes your schedule will have, choose which pets to include, then press the "generate schedule" button.
+6. Upon generation, a message will show how many minutes were able to be used out of the time given. Feel free to filter tasks by priority or pet if you'd like to see the generated plan differently, it will automatically upadte to reflect those changes.
+7. Marked a task complete? Click "generate schedule" to see the next occurrence. Super helpful if you completed everything for the day.
+8. Want to remove/add another pet? Do so and generate the schedule again.
+9. You can also sort tasks by priority only, duration only, or both (priority first).
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+**Screenshots:**
 
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
+![Owner and Pets](<Screenshot 2026-06-25 062345.png>)
+![Tasks](<Screenshot 2026-06-25 062403.png>)
+![Build Schedule](<Screenshot 2026-06-25 062530.png>)
